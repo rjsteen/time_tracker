@@ -1,0 +1,18 @@
+<h2>Show Timer</h2>
+
+<ul>
+
+  <li>
+    <strong>Stopped at:</strong>
+    <%= @timer.stopped_at %>
+  </li>
+
+  <li>
+    <strong>Duration:</strong>
+    <%= @timer.duration %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: timer_path(@conn, :edit, @timer) %></span>
+<span><%= link "Back", to: timer_path(@conn, :index) %></span>

@@ -1,0 +1,5 @@
+<h2>Edit Timer</h2>
+
+<%= render "form.html", Map.put(assigns, :action, timer_path(@conn, :update, @timer)) %>
+
+<span><%= link "Back", to: timer_path(@conn, :index) %></span>

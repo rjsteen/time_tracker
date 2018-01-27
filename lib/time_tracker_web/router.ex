@@ -39,10 +39,14 @@ defmodule TimeTrackerWeb.Router do
 
   end
 
-  scope "/", MyProjectWeb do
+  scope "/", TimeTrackerWeb do
     pipe_through :protected
 
     get "/", PageController, :index
+    resources "/customers", CustomerController
+    resources "/projects", ProjectController
+    resources "/tasks", TaskController
+    resources "/timers", TimerController
   end
 
   # Other scopes may use custom stacks.
