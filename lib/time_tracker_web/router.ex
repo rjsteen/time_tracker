@@ -42,7 +42,7 @@ defmodule TimeTrackerWeb.Router do
   scope "/", TimeTrackerWeb do
     pipe_through :protected
 
-    get "/", PageController, :index
+    get "/", ProjectController, :index
     resources "/customers", CustomerController
     resources "/projects", ProjectController
     resources "/tasks", TaskController

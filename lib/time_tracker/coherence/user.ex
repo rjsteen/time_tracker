@@ -3,11 +3,10 @@ defmodule TimeTracker.Coherence.User do
   use Ecto.Schema
   use Coherence.Schema
 
-  
-
   schema "users" do
     field :name, :string
     field :email, :string
+    field :is_admin, :boolean
     coherence_schema()
 
     timestamps()
@@ -15,7 +14,7 @@ defmodule TimeTracker.Coherence.User do
 
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, [:name, :email] ++ coherence_fields())
+    |> cast(params, [:name, :email, :is_admin] ++ coherence_fields())
     |> validate_required([:name, :email])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)

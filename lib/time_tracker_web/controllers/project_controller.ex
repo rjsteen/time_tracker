@@ -4,6 +4,8 @@ defmodule TimeTrackerWeb.ProjectController do
   alias TimeTracker.Tracker
   alias TimeTracker.Tracker.Project
 
+#  plug :check_if_admin when action in [:new, :create, :edit, :update, :delete]
+
   def index(conn, _params) do
     projects = Tracker.list_projects()
     render(conn, "index.html", projects: projects)
@@ -56,5 +58,9 @@ defmodule TimeTrackerWeb.ProjectController do
     conn
     |> put_flash(:info, "Project deleted successfully.")
     |> redirect(to: project_path(conn, :index))
+  end
+
+  defp check_if_admin(conn) do
+    conn
   end
 end
