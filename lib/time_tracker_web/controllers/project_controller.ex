@@ -4,7 +4,7 @@ defmodule TimeTrackerWeb.ProjectController do
   alias TimeTracker.Tracker
   alias TimeTracker.Tracker.Project
 
-#  plug :check_if_admin when action in [:new, :create, :edit, :update, :delete]
+  plug :authorize_user when action not in [:show, :index]
 
   def index(conn, _params) do
     projects = Tracker.list_projects()
@@ -60,7 +60,11 @@ defmodule TimeTrackerWeb.ProjectController do
     |> redirect(to: project_path(conn, :index))
   end
 
-  defp check_if_admin(conn) do
-    conn
+  defp authorize_user(conn, _) do
+    if conn.assigns[:current_user].is_admin do
+      conn
+    else
+      conn |> put_flash(:info, "You can't access that page") |> redirect(to: "/") |> halt()
+    end
   end
 end

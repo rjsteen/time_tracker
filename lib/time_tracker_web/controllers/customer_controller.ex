@@ -4,6 +4,8 @@ defmodule TimeTrackerWeb.CustomerController do
   alias TimeTracker.Tracker
   alias TimeTracker.Tracker.Customer
 
+  plug :authorize_user when action not in [:show, :index]
+
   def index(conn, _params) do
     customers = Tracker.list_customers()
     render(conn, "index.html", customers: customers)
@@ -56,5 +58,13 @@ defmodule TimeTrackerWeb.CustomerController do
     conn
     |> put_flash(:info, "Customer deleted successfully.")
     |> redirect(to: customer_path(conn, :index))
+  end
+
+  defp authorize_user(conn, _) do
+    if conn.assigns[:current_user].is_admin do
+      conn
+    else
+      conn |> put_flash(:info, "You can't access that page") |> redirect(to: "/") |> halt()
+    end
   end
 end
