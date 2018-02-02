@@ -14,5 +14,7 @@
 
 </ul>
 
+<h3><span><%= link "Go to Tasks", to: project_task_path(@conn, :index, @project) %></span></h3>
+
 <span><%= link "Edit", to: project_path(@conn, :edit, @project) %></span>
 <span><%= link "Back", to: project_path(@conn, :index) %></span>

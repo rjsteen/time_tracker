@@ -16,7 +16,6 @@ defmodule TimeTracker.Tracker.Timer do
   @doc false
   def changeset(%Timer{} = timer, attrs) do
     timer
-    |> cast(attrs, [:stopped_at, :duration])
-    |> validate_required([:stopped_at, :duration])
+    |> cast(attrs, [:stopped_at, :duration, :task_id, :user_id])
   end
 end

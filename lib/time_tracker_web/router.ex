@@ -44,8 +44,9 @@ defmodule TimeTrackerWeb.Router do
 
     get "/", ProjectController, :index
     resources "/customers", CustomerController
-    resources "/projects", ProjectController
-    resources "/tasks", TaskController
+    resources "/projects", ProjectController do
+      resources "/tasks", TaskController
+    end
     resources "/timers", TimerController
   end
 

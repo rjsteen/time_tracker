@@ -325,6 +325,10 @@ defmodule TimeTracker.Tracker do
   """
   def get_timer!(id), do: Repo.get!(Timer, id)
 
+  def get_started_timer_for_user(user) do
+
+  end
+
   @doc """
   Creates a timer.
 

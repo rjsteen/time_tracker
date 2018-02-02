@@ -1,4 +1,5 @@
 defmodule TimeTrackerWeb.TimerController do
+  require IEx
   use TimeTrackerWeb, :controller
 
   alias TimeTracker.Tracker
@@ -15,11 +16,14 @@ defmodule TimeTrackerWeb.TimerController do
   end
 
   def create(conn, %{"timer" => timer_params}) do
+    project = Tracker.get_project!(conn.params["timer"]["project_id"])
+    task = Tracker.get_task!(conn.params["timer"]["task_id"])
+    timer_params = %{task_id: task.id, user_id: conn.assigns[:current_user].id}
     case Tracker.create_timer(timer_params) do
       {:ok, timer} ->
         conn
-        |> put_flash(:info, "Timer created successfully.")
-        |> redirect(to: timer_path(conn, :show, timer))
+        |> put_flash(:info, "Time Started")
+        |> redirect(to: project_task_path(conn, :index, project))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
