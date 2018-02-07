@@ -2,12 +2,14 @@ defmodule TimeTracker.Coherence.User do
   @moduledoc false
   use Ecto.Schema
   use Coherence.Schema
+  alias TimeTracker.Tracker
 
   schema "users" do
     field :name, :string
     field :email, :string
     field :is_admin, :boolean
     coherence_schema()
+    has_many :timers, Timer
 
     timestamps()
   end

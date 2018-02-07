@@ -48,6 +48,7 @@ defmodule TimeTrackerWeb.Router do
       resources "/tasks", TaskController
     end
     resources "/timers", TimerController
+    post "/stop_timer", TimerController, :stop_timer, as: :stop_timer
   end
 
   # Other scopes may use custom stacks.

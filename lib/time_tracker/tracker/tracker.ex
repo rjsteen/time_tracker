@@ -1,4 +1,5 @@
 defmodule TimeTracker.Tracker do
+
   @moduledoc """
   The Tracker context.  This is fancy.
   """
@@ -8,6 +9,7 @@ defmodule TimeTracker.Tracker do
 
   alias TimeTracker.Tracker.Customer
 
+  require IEx
   @doc """
   Returns the list of customers.
 
@@ -324,9 +326,9 @@ defmodule TimeTracker.Tracker do
 
   """
   def get_timer!(id), do: Repo.get!(Timer, id)
-
-  def get_started_timer_for_user(user) do
-
+  
+  def get_started_timer_for_user(user_id) do
+    Repo.get_by(Timer, user_id: user_id, duration: 0)
   end
 
   @doc """

@@ -2,9 +2,8 @@ defmodule TimeTrackerWeb.TaskView do
   require IEx
   use TimeTrackerWeb, :view
   alias TimeTracker.Tracker
-  alias TimeTracker.Repo
 
   def user_started_timer?(conn) do
-    IEx.pry
+    Tracker.get_started_timer_for_user(Coherence.current_user(conn).id)
   end
 end
