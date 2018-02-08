@@ -327,8 +327,8 @@ defmodule TimeTracker.Tracker do
   """
   def get_timer!(id), do: Repo.get!(Timer, id)
   
-  def get_started_timer_for_user(user_id) do
-    Repo.get_by(Timer, user_id: user_id, duration: 0)
+  def get_started_timer_for_user_and_task(user_id, task_id) do
+    Repo.get_by(Timer, user_id: user_id, task_id: task_id, duration: 0)
   end
 
   @doc """

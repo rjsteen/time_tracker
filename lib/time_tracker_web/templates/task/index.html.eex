@@ -16,12 +16,12 @@
       <td><%= task.description %></td>
 
       <td class="text-right">
-        <%= unless user_started_timer?(@conn) do %>
+        <%= unless user_started_timer?(@conn, task) do %>
           <span><%= button "Start Time", to: timer_path(@conn, :create, timer: %{task_id: task, project_id: @project}), class: "btn btn-default btn-xs" %></span>
         <% else %>
-          <span><%= button "Stop Time", to: stop_timer_path(@conn, :stop_timer), class: "btn btn-default btn-xs" %></span>
+          <span><%= button "Stop Time", to: project_task_stop_timer_path(@conn, :stop_timer, @project, task), class: "btn btn-default btn-xs" %></span>
         <% end %>
-        <span><%= link "Show", to: project_task_path(@conn, :show, @project, task), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Enter Time", to: project_task_path(@conn, :show, @project, task), class: "btn btn-default btn-xs" %></span>
         <span><%= link "Edit", to: project_task_path(@conn, :edit, @project, task), class: "btn btn-default btn-xs" %></span>
         <span><%= link "Delete", to: project_task_path(@conn, :delete, @project, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>

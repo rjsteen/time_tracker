@@ -1,18 +1,5 @@
-<h2>Show Task</h2>
+<h2>Task: <%= @task.name %></h2>
 
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @task.name %>
-  </li>
-
-  <li>
-    <strong>Description:</strong>
-    <%= @task.description %>
-  </li>
-
-</ul>
 
 <span><%= link "Edit", to: project_task_path(@conn, :edit, @project, @task) %></span>
 <span><%= link "Back", to: project_task_path(@conn, :index, @project) %></span>

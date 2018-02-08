@@ -45,10 +45,11 @@ defmodule TimeTrackerWeb.Router do
     get "/", ProjectController, :index
     resources "/customers", CustomerController
     resources "/projects", ProjectController do
-      resources "/tasks", TaskController
+      resources "/tasks", TaskController do
+        post "stop_timer", TimerController, :stop_timer, as: :stop_timer
+      end
     end
     resources "/timers", TimerController
-    post "/stop_timer", TimerController, :stop_timer, as: :stop_timer
   end
 
   # Other scopes may use custom stacks.

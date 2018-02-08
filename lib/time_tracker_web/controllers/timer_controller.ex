@@ -30,11 +30,12 @@ defmodule TimeTrackerWeb.TimerController do
   end
 
   def stop_timer(conn, _) do
-    IEx.pry 
-    timer = Tracker.get_started_timer_for_user(Coherence.current_user(conn).id)
+    project = Tracker.get_project!(conn.params["project_id"])
+    task = Tracker.get_task!(conn.params["task_id"])
+    timer = Tracker.get_started_timer_for_user_and_task(Coherence.current_user(conn).id, task.id)
     duration = NaiveDateTime.diff(NaiveDateTime.utc_now, timer.inserted_at)
     Tracker.update_timer(timer, %{duration: duration})
-    redirect(to: project_task_path(conn, :index, project))
+    redirect(conn, to: project_task_path(conn, :index, project))
   end
 
   def show(conn, %{"id" => id}) do
